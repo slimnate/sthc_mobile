@@ -255,20 +255,10 @@ class _HumiditySettingsEditorState extends State<HumiditySettingsEditor> {
   void onUpdatePressed(BuildContext context) {
     var settings = Provider.of<HumiditySettingsModel>(context, listen: false);
 
-    print("target: " + targetCtrl.text);
-    print("kickon: " + kickOnCtrl.text);
-    print("fanstop: " + fanStopCtrl.text);
-    print("update: " + updateCtrl.text);
-
     double target = double.parse(targetCtrl.text);
     double kickOn = double.parse(kickOnCtrl.text);
     int fanStop = int.parse(fanStopCtrl.text);
     int update = int.parse(updateCtrl.text);
-
-    print("target: " + target.toString());
-    print("kickon: " + kickOn.toString());
-    print("fanstop: " + fanStop.toString());
-    print("update: " + update.toString());
 
     //TODO: Update model
   }
