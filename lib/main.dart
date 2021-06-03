@@ -19,6 +19,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<HumidityStatusModel>(
             create: (context) => HumidityStatusModel(),
           ),
+          ChangeNotifierProvider<HumiditySettingsModel>(
+            create: (context) => HumiditySettingsModel(),
+          ),
           ChangeNotifierProvider<ServerTimeModel>(
             create: (context) => ServerTimeModel(),
           ),
@@ -62,7 +65,7 @@ class RoutedListPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           title,
-          style: Theme.of(context).textTheme.headline3,
+          style: Theme.of(context).textTheme.headline4,
         ),
       ),
       body: ListView(
@@ -70,6 +73,7 @@ class RoutedListPage extends StatelessWidget {
         children: children,
       ),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: routeIndex,
         items: [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -142,9 +146,8 @@ class HumiditySettingsPage extends StatelessWidget {
       title: "Humidity Settings",
       routeIndex: 1,
       children: [
-        ServerTimeCard(),
-        HumidityStatus(),
-        LightStatusWidget(),
+        //HumidityStatus(),
+        HumiditySettingsEditor(),
       ],
     );
   }

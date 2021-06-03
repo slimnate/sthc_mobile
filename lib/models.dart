@@ -9,6 +9,13 @@ class HumidityStatusModel extends ChangeNotifier {
   final bool fansEnabled = true;
 }
 
+class HumiditySettingsModel extends ChangeNotifier {
+  final double target = 90;
+  final double kickOn = 80;
+  final int fanStop = 15;
+  final int updateInterval = 5;
+}
+
 class LightStatusModel extends ChangeNotifier {
   final LightStatus status = LightStatus.DAY;
   final DateTime dayStart = DateTime.now();

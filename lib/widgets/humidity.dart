@@ -188,3 +188,108 @@ class HumidityWidget extends StatelessWidget {
     );
   }
 }
+
+class HumiditySettingsEditor extends StatefulWidget {
+  HumiditySettingsEditor({Key? key}) : super(key: key);
+
+  @override
+  _HumiditySettingsEditorState createState() => _HumiditySettingsEditorState();
+}
+
+class _HumiditySettingsEditorState extends State<HumiditySettingsEditor> {
+  final targetCtrl = TextEditingController();
+  final kickOnCtrl = TextEditingController();
+  final fanStopCtrl = TextEditingController();
+  final updateCtrl = TextEditingController();
+
+  @override
+  void dispose() {
+    targetCtrl.dispose();
+    kickOnCtrl.dispose();
+    fanStopCtrl.dispose();
+    updateCtrl.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var settings = context.watch<HumiditySettingsModel>();
+
+    targetCtrl.text = settings.target.toStringAsFixed(1);
+    kickOnCtrl.text = settings.kickOn.toStringAsFixed(1);
+    fanStopCtrl.text = settings.fanStop.toString();
+    updateCtrl.text = settings.updateInterval.toString();
+
+    return TitledColumnCard(
+      title: "Update Humidity Settings",
+      children: [
+        Table(
+          columnWidths: {
+            0: FractionColumnWidth(.5),
+            1: FractionColumnWidth(.4),
+            2: FractionColumnWidth(.1),
+          },
+          defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+          children: [
+            buildFormRow("Target Humidity:", targetCtrl, '%'),
+            buildFormRow("Kick-On Humidity:", kickOnCtrl, '%'),
+            buildFormRow("Fan Stop Delay:", fanStopCtrl, 's'),
+            buildFormRow("Update Interval:", updateCtrl, 's'),
+          ],
+        ),
+        Container(
+          padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+          height: 60,
+          width: MediaQuery.of(context).size.width,
+          child: ElevatedButton(
+            onPressed: () => {
+              onUpdatePressed(context),
+            },
+            child: Text("Update Settings"),
+          ),
+        ),
+      ],
+    );
+  }
+
+  void onUpdatePressed(BuildContext context) {
+    var settings = Provider.of<HumiditySettingsModel>(context, listen: false);
+
+    print("target: " + targetCtrl.text);
+    print("kickon: " + kickOnCtrl.text);
+    print("fanstop: " + fanStopCtrl.text);
+    print("update: " + updateCtrl.text);
+
+    double target = double.parse(targetCtrl.text);
+    double kickOn = double.parse(kickOnCtrl.text);
+    int fanStop = int.parse(fanStopCtrl.text);
+    int update = int.parse(updateCtrl.text);
+
+    print("target: " + target.toString());
+    print("kickon: " + kickOn.toString());
+    print("fanstop: " + fanStop.toString());
+    print("update: " + update.toString());
+
+    //TODO: Update model
+  }
+
+  TableRow buildFormRow(
+      String label, TextEditingController ctrl, String postLabel) {
+    return TableRow(
+      children: [
+        Text(
+          label,
+          style: Theme.of(context).textTheme.bodyText1,
+        ),
+        TextField(
+          textAlign: TextAlign.end,
+          controller: ctrl,
+        ),
+        Text(
+          postLabel,
+          style: Theme.of(context).textTheme.caption?.copyWith(fontSize: 16),
+        ),
+      ],
+    );
+  }
+}
