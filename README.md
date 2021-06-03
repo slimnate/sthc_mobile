@@ -1,8 +1,13 @@
 # sthc_mobile
 
-A new Flutter project.
+A mobile app built with Flutter that is designed to monitor and control my Snake Tank Humidity Controller project.
 
 ## Getting Started
+
+This project connects to an arduino on the local network running the code in [this repo](https://github.com/slimnate/arduino_climate_control), and is designed to connect with it and provide the following functionality via a web server running on the arduino:
+- View the server time, humidity status, and light status
+- Update humidity controller settings 
+- Update light schedule
 
 This project is a starting point for a Flutter application.
 
