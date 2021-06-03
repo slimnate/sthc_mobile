@@ -36,12 +36,9 @@ class MyApp extends StatelessWidget {
           ),
           initialRoute: '/',
           routes: {
-            '/': (context) => Homepage(
-                  routeIndex: 0,
-                ),
-            '/humidity': (context) => HumiditySettingsPage(
-                  routeIndex: 1,
-                ),
+            '/': (context) => Homepage(routeIndex: 0),
+            '/humidity': (context) => HumiditySettingsPage(routeIndex: 1),
+            '/lights': (context) => LightSettingsPage(routeIndex: 2),
           },
         ));
   }
@@ -148,6 +145,26 @@ class HumiditySettingsPage extends StatelessWidget {
       children: [
         //HumidityStatus(),
         HumiditySettingsEditor(),
+      ],
+    );
+  }
+}
+
+class LightSettingsPage extends StatelessWidget {
+  final int routeIndex;
+
+  const LightSettingsPage({
+    Key? key,
+    required this.routeIndex,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return RoutedListPage(
+      title: "Light Schedule",
+      routeIndex: routeIndex,
+      children: [
+        LightScheduleEditor(),
       ],
     );
   }

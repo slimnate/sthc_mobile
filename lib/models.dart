@@ -18,10 +18,63 @@ class HumiditySettingsModel extends ChangeNotifier {
 
 class LightStatusModel extends ChangeNotifier {
   final LightStatus status = LightStatus.DAY;
-  final DateTime dayStart = DateTime.now();
-  final DateTime nightStart = DateTime.now().add(Duration(hours: 12));
+  late DateTime dayStart;
+  late DateTime nightStart;
+  final LightSchedule schedule = FixedSchedule(
+    entry: ScheduleEntry(
+      dayStart: DateTime.now(),
+      nightStart: DateTime.now().add(
+        Duration(hours: 12),
+      ),
+    ),
+  );
+
+  LightStatusModel() {
+    dayStart = schedule.getEntry(DateTime.now()).dayStart;
+    nightStart = schedule.getEntry(DateTime.now()).nightStart;
+  }
 }
 
 class ServerTimeModel extends ChangeNotifier {
   final DateTime dateTime = DateTime.now();
+}
+
+class ScheduleEntry {
+  final DateTime dayStart;
+  final DateTime nightStart;
+
+  ScheduleEntry({
+    required this.dayStart,
+    required this.nightStart,
+  });
+}
+
+// ==== Scheduling classess ====
+
+abstract class LightSchedule {
+  ScheduleEntry getEntry(DateTime date);
+}
+
+class FixedSchedule extends LightSchedule {
+  ScheduleEntry entry;
+
+  FixedSchedule({
+    required this.entry,
+  });
+
+  ScheduleEntry getEntry(DateTime date) {
+    return entry;
+  }
+}
+
+class MonthlySchedule extends LightSchedule {
+  List<ScheduleEntry> entries;
+
+  MonthlySchedule({
+    required this.entries,
+  });
+
+  ScheduleEntry getEntry(DateTime date) {
+    return entries[date.month - 1];
+  }
 }

@@ -61,3 +61,24 @@ class DayNightDisplay extends StatelessWidget {
     );
   }
 }
+
+class LightScheduleEditor extends StatefulWidget {
+  LightScheduleEditor({Key? key}) : super(key: key);
+
+  @override
+  _LightScheduleEditorState createState() => _LightScheduleEditorState();
+}
+
+class _LightScheduleEditorState extends State<LightScheduleEditor> {
+  final TextEditingController scheduleType = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return TitledColumnCard(
+      title: "Update Light Schedule",
+      children: [
+        Row(),
+      ],
+    );
+  }
+}
