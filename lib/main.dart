@@ -99,7 +99,7 @@ class RoutedListPage extends StatelessWidget {
     }
     switch (index) {
       case 0:
-        Navigator.pop(context);
+        Navigator.popUntil(context, (route) => route.settings.name == '/');
         break;
       case 1:
         Navigator.pushNamed(context, '/humidity');
@@ -144,7 +144,7 @@ class HumiditySettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return RoutedListPage(
       title: "Humidity Settings",
-      routeIndex: 1,
+      routeIndex: routeIndex,
       children: [
         //HumidityStatus(),
         HumiditySettingsEditor(),
