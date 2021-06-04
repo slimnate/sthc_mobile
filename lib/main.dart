@@ -28,6 +28,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<LightStatusModel>(
             create: (context) => LightStatusModel(),
           ),
+          ChangeNotifierProvider<LightScheduleModel>(
+            create: (context) => LightScheduleModel(),
+          ),
         ],
         child: MaterialApp(
           title: 'HumidityController',

@@ -35,6 +35,18 @@ class LightStatusModel extends ChangeNotifier {
   }
 }
 
+class LightScheduleModel extends ChangeNotifier {
+  final ScheduleType type = ScheduleType.FIXED;
+  final LightSchedule schedule = FixedSchedule(
+    entry: ScheduleEntry(
+      dayStart: DateTime.now(),
+      nightStart: DateTime.now().add(
+        Duration(hours: 12),
+      ),
+    ),
+  );
+}
+
 class ServerTimeModel extends ChangeNotifier {
   final DateTime dateTime = DateTime.now();
 }
@@ -51,8 +63,11 @@ class ScheduleEntry {
 
 // ==== Scheduling classess ====
 
+enum ScheduleType { FIXED, MONTHLY }
+
 abstract class LightSchedule {
   ScheduleEntry getEntry(DateTime date);
+  List<ScheduleEntry> getEntries();
 }
 
 class FixedSchedule extends LightSchedule {
@@ -65,6 +80,10 @@ class FixedSchedule extends LightSchedule {
   ScheduleEntry getEntry(DateTime date) {
     return entry;
   }
+
+  List<ScheduleEntry> getEntries() {
+    return [entry];
+  }
 }
 
 class MonthlySchedule extends LightSchedule {
@@ -76,5 +95,9 @@ class MonthlySchedule extends LightSchedule {
 
   ScheduleEntry getEntry(DateTime date) {
     return entries[date.month - 1];
+  }
+
+  List<ScheduleEntry> getEntries() {
+    return entries;
   }
 }
