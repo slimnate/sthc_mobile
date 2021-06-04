@@ -110,10 +110,7 @@ class _LightScheduleEditorState extends State<LightScheduleEditor> {
                   items: dropdownItems,
                   onChanged: (ScheduleType? t) {
                     setState(
-                      () {
-                        scheduleType = t as ScheduleType;
-                        print(t);
-                      },
+                      () => scheduleType = t as ScheduleType,
                     );
                   },
                 ),
@@ -155,15 +152,14 @@ class _LightScheduleEditorState extends State<LightScheduleEditor> {
     if (t == ScheduleType.FIXED) {
       return FixedScheduleEditor();
     } else {
-      //TODO: Implement MonthlyScheduleEditor
-      return FixedScheduleEditor();
+      return MonthlyScheduleEditor();
     }
   }
 
   void onUpdatePressed(BuildContext context) {}
 }
 
-// ==== Schedule Entry Editor ====
+// ==== Fixed Schedule Editor ====
 
 class FixedScheduleEditor extends StatefulWidget {
   FixedScheduleEditor({Key? key}) : super(key: key);
@@ -222,5 +218,104 @@ class _FixedScheduleEditorState extends State<FixedScheduleEditor> {
         ],
       ),
     );
+  }
+
+  DateTime getDateTime(TextEditingController ctrl) {
+    String datePart = "19700101 ";
+    return DateTime.parse(datePart + ctrl.text);
+  }
+
+  LightSchedule getSchedule() {
+    return FixedSchedule(
+      entry: ScheduleEntry(
+        dayStart: dayStartCtrl.text.parseTime(),
+        nightStart: nightStartCtrl.text.parseTime(),
+      ),
+    );
+  }
+}
+
+// ==== Monthly Schedule Editor ====
+
+class MonthlyScheduleEditor extends StatefulWidget {
+  MonthlyScheduleEditor({Key? key}) : super(key: key);
+
+  @override
+  _MonthlyScheduleEditorState createState() => _MonthlyScheduleEditorState();
+}
+
+class _MonthlyScheduleEditorState extends State<MonthlyScheduleEditor> {
+  static const int CONTROLLER_COUNT = 12;
+  final List<TextEditingController> dayStartCtrls = List.filled(
+    CONTROLLER_COUNT,
+    TextEditingController(),
+  );
+  final List<TextEditingController> nightStartCtrls = List.filled(
+    CONTROLLER_COUNT,
+    TextEditingController(),
+  );
+
+  @override
+  Widget build(BuildContext context) {
+    var settings = context.watch<LightScheduleModel>();
+
+    fillControllerValues(settings.schedule);
+
+    return Container(
+      child: Table(
+        columnWidths: {
+          0: FractionColumnWidth(.25),
+          1: FractionColumnWidth(.25),
+          2: FractionColumnWidth(.25),
+          3: FractionColumnWidth(.25),
+        },
+        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+        children: buildTableRows(),
+      ),
+    );
+  }
+
+  void fillControllerValues(LightSchedule schedule) {
+    bool isMonthly = (schedule is MonthlySchedule);
+
+    for (int i = 0; i < CONTROLLER_COUNT; i++) {
+      //populate entries based on existing schedule type in model
+      ScheduleEntry entry;
+      if (isMonthly) {
+        // populate individual entries if monthly schedule
+        entry = schedule.getEntries()[i];
+      } else {
+        // populate entries with default otherwise
+        entry = schedule.getEntry(DateTime.now());
+      }
+
+      print(entry);
+
+      dayStartCtrls[i].text = entry.dayStart.buildPaddedTimeString();
+      nightStartCtrls[i].text = entry.nightStart.buildPaddedTimeString();
+    }
+  }
+
+  List<TableRow> buildTableRows() {
+    List<TableRow> rows = List.empty(growable: true);
+    for (int i = 0; i < CONTROLLER_COUNT; i++) {
+      rows.add(
+        TableRow(
+          children: [
+            Text("Day Start:"),
+            TextField(
+              textAlign: TextAlign.left,
+              controller: dayStartCtrls[i],
+            ),
+            Text("Night Start:"),
+            TextField(
+              textAlign: TextAlign.left,
+              controller: nightStartCtrls[i],
+            ),
+          ],
+        ),
+      );
+    }
+    return rows;
   }
 }
