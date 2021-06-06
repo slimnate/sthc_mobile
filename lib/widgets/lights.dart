@@ -220,11 +220,6 @@ class _FixedScheduleEditorState extends State<FixedScheduleEditor> {
     );
   }
 
-  DateTime getDateTime(TextEditingController ctrl) {
-    String datePart = "19700101 ";
-    return DateTime.parse(datePart + ctrl.text);
-  }
-
   LightSchedule getSchedule() {
     return FixedSchedule(
       entry: ScheduleEntry(
