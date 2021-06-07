@@ -1,4 +1,4 @@
-extension DTStringBuilders on DateTime {
+extension StringBuilder on DateTime {
   String buildDateString() {
     String year = this.year.toString();
     String month = this.month.toString();
