@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 
-import '../models/all.dart';
+import '../models/models.dart';
 import 'titled_card.dart';
 
 class HumidityStatus extends StatelessWidget {
