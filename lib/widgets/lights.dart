@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../extensions.dart';
+import '../extensions/extensions.dart';
 import '../models/all.dart';
 import 'titled_card.dart';
 import 'labeled_pair.dart';
