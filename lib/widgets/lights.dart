@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:sthc_mobile/widgets/titled_card.dart';
-import '../models.dart';
-import 'labeled_pair.dart';
+
 import '../extensions.dart';
+import '../models/all.dart';
+import 'titled_card.dart';
+import 'labeled_pair.dart';
 
 class LightStatusWidget extends StatelessWidget {
   const LightStatusWidget({Key? key}) : super(key: key);
@@ -157,6 +157,10 @@ class _LightScheduleEditorState extends State<LightScheduleEditor> {
   }
 
   void onUpdatePressed(BuildContext context) {}
+}
+
+abstract class AbstractScheduleProvider extends StatefulWidget {
+  LightSchedule getLocalSchedule();
 }
 
 // ==== Fixed Schedule Editor ====

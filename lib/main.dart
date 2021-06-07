@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'models.dart';
+import 'models/all.dart';
 import 'widgets/time.dart';
 import 'widgets/humidity.dart';
 import 'widgets/lights.dart';

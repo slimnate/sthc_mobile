@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sthc_mobile/widgets/titled_card.dart';
-import '../models.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
+
+import '../models/all.dart';
+import 'titled_card.dart';
 
 class HumidityStatus extends StatelessWidget {
   const HumidityStatus({Key? key}) : super(key: key);
