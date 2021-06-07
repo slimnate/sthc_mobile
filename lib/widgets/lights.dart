@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../extensions/extensions.dart';
 import '../models/models.dart';
-import 'titled_card.dart';
-import 'labeled_pair.dart';
+import 'generic/titled-card.dart';
+import 'generic/labeled-pair.dart';
 
 class LightStatusWidget extends StatelessWidget {
   const LightStatusWidget({Key? key}) : super(key: key);

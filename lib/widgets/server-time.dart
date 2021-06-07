@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 
 import '../extensions/extensions.dart';
 import '../models/server-time.dart';
-import 'labeled_pair.dart';
-import 'titled_card.dart';
+import 'generic/labeled-pair.dart';
+import 'generic/titled-card.dart';
 
 class ServerTimeCard extends StatelessWidget {
   const ServerTimeCard({

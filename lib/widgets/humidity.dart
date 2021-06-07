@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 
 import '../models/models.dart';
-import 'titled_card.dart';
+import 'generic/titled-card.dart';
+import 'generic/component-status.dart';
 
 class HumidityStatus extends StatelessWidget {
   const HumidityStatus({Key? key}) : super(key: key);
@@ -39,39 +40,6 @@ class HumidityStatus extends StatelessWidget {
         ),
       ),
     ]);
-  }
-}
-
-class ComponentStatus extends StatelessWidget {
-  final String name;
-  final bool enabled;
-
-  ComponentStatus({Key? key, this.enabled = false, required this.name})
-      : super(key: key);
-
-  Widget build(BuildContext context) {
-    return Container(
-      child: Expanded(
-        child: Row(
-          children: [
-            buildIcon(),
-            Text(
-              name,
-              style: Theme.of(context).textTheme.headline6,
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Icon buildIcon() {
-    return Icon(
-      Icons.blur_circular,
-      color: enabled ? Colors.green : Colors.red,
-      size: 40,
-      semanticLabel: 'Icon indicating atomizer status',
-    );
   }
 }
 
