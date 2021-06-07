@@ -15,8 +15,6 @@ class ServerTimeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     var serverTimeData = context.watch<ServerTimeModel>().dateTime;
 
-    var headingStyle = Theme.of(context).textTheme.headline6;
-
     return TitledColumnCard(title: "Server Time", children: [
       DualLabeledPairRow(
         data: [
