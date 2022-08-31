@@ -13,18 +13,18 @@ class ServerTimeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var serverTimeData = context.watch<ServerTimeModel>().dateTime;
+    var serverTimeData = context.watch<ServerTimeModel>();
 
     return TitledColumnCard(title: "Server Time", children: [
       DualLabeledPairRow(
         data: [
           LabeledPair(
             key: "Date",
-            value: serverTimeData.buildDateString(),
+            value: serverTimeData.dateString,
           ),
           LabeledPair(
             key: "Time",
-            value: serverTimeData.buildPaddedTimeString(),
+            value: serverTimeData.timeString,
           ),
         ],
       ),

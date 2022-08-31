@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../generic/routed-list-page.dart';
+import '../server-time.dart';
 import '../humidity.dart';
 import '../lights.dart';
-import '../server-time.dart';
 
 class HomePage extends StatelessWidget {
   final int routeIndex;
